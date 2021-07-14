@@ -1,0 +1,19 @@
+version: "3.7"
+services: 
+    app:
+        build:
+            context: .
+        ports:
+            - 5000:5000
+        working_dir: /app
+
+    cassandra:
+        container_name: cassandra
+        image: cassandra:latest
+        ports:
+            - 9042:9042
+        environment:
+            - CASSANDRA_START_RPC=true
+            - CASSANDRA_CLUSTER_NAME=MyCluster
+            - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+            - CASSANDRA_DC=datacenter
